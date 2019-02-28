@@ -1,36 +1,20 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap/";
+
 const NavBarH = props => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/">
-        Vidly
-      </Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/movies">
-            Movies
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/customers">
-            Customers
-          </NavLink>
-          <NavLink className="nav-item nav-link" to="/rentals">
-            Rentals
-          </NavLink>
-        </div>
-      </div>
-    </nav>
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand href="/">Vidly</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="/movies">Movies</Nav.Link>
+          <Nav.Link href="/customers">Customers</Nav.Link>
+          <Nav.Link href="/rentals">Rentals</Nav.Link>
+          <Nav.Link href="/login">Log-In</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
