@@ -8,8 +8,8 @@ const Input = ({ name, label, value, onChange }) => {
         onChange={onChange}
         type="text"
         id={name}
-        className="form-control"
         name={name}
+        className="form-control"
       />
     </div>
   );
