@@ -19,7 +19,7 @@ class LoginForm extends Component {
     //call to validate function and further execution based on value of validate function return value
     const error = this.validate();
     console.log(error);
-    this.setState({ error });
+    this.setState({ error: error || {} }); //key runtime error was caused bcoz of this as during run time if all input fileds where filled then this.setstate was called and value where set to null insted of any object and this causes furhter error so insted of null if error is NULL returned from the Validate function then it must set the error obj of state to empty object insted of NULL for this a beautiful logic is inmplimented via || <or> ie if error is null means a falsi then or part will be set as value
     console.log(Object.keys(this.state.error));
     if (error) return;
 
