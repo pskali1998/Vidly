@@ -26,11 +26,26 @@ class LoginForm extends Component {
     //call server save change and redirect the user
     console.log("Submited");
   };
+  validateProperty = ({ name, value }) => {
+    if (name === "username") {
+      if (value.trim() === "") return "Username can't be a empty string";
+    }
+    if (name === "password") {
+      if (value.trim() === "") return "Password can't be a empty string";
+    }
+  };
   handleChange = ({ currentTarget: input }) => {
+    //Logic to register change while typing and for an individual component
+    const error = { ...this.state.error }; // copying the main error obj
+    const errorMessage = this.validateProperty(input); //call to each propery validator function
+    if (errorMessage) error[input.name] = errorMessage;
+    // rendering condition to store the error in errors[local] object
+    else delete error[input.name]; // If no error then deleting the prv. error object
+
     const account = { ...this.state.account };
     account[input.name] = input.value;
     console.log("change registered");
-    this.setState({ account });
+    this.setState({ account, error }); // updating the state to render the error object
   };
   render() {
     const { account, error } = this.state;
