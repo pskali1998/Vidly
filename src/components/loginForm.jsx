@@ -8,21 +8,21 @@ class LoginForm extends Component {
   };
   // schema for joi >> validation
   schema = {
-    useername: Joi.string().required(),
-    password: Joi.string().required()
+    username: Joi.string()
+      .required()
+      .label("Username"),
+    password: Joi.string()
+      .required()
+      .label("Password")
   };
   validate = () => {
-    const result = Joi.validate(this.state.account, this.schema, {
-      abortEarly: false
-    });
-    console.log(result);
+    const option = { abortEarly: false };
+    const result = Joi.validate(this.state.account, this.schema, option);
+    if (!result.error) return null;
+
     const error = {};
-    const { account } = this.state;
-    if (account.username.trim() === "")
-      error.username = "Name can not be empty";
-    if (account.password.trim() === "")
-      error.password = "Password can not be empty";
-    return Object.keys(error).length === 0 ? null : error;
+    for (let item of result.error.details) error[item.path[0]] = item.message;
+    return error;
   };
   handleSubmit = e => {
     e.preventDefault();
