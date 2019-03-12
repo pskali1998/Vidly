@@ -1,11 +1,21 @@
 import React, { Component } from "react";
 import Input from "./common/input";
+import Joi from "joi-browser";
 class LoginForm extends Component {
   state = {
     account: { username: "", password: "" },
     error: {}
   };
+  // schema for joi >> validation
+  schema = {
+    useername: Joi.string().required(),
+    password: Joi.string().required()
+  };
   validate = () => {
+    const result = Joi.validate(this.state.account, this.schema, {
+      abortEarly: false
+    });
+    console.log(result);
     const error = {};
     const { account } = this.state;
     if (account.username.trim() === "")
@@ -28,10 +38,10 @@ class LoginForm extends Component {
   };
   validateProperty = ({ name, value }) => {
     if (name === "username") {
-      if (value.trim() === "") return "Username can't be a empty string";
+      if (value.trim() === "") return "Username can't be a empty!";
     }
     if (name === "password") {
-      if (value.trim() === "") return "Password can't be a empty string";
+      if (value.trim() === "") return "Password can't be a empty!";
     }
   };
   handleChange = ({ currentTarget: input }) => {
